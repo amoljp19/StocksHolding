@@ -6,7 +6,7 @@ import retrofit2.http.GET
 
 interface HoldingsApiService {
 
-    @GET("v3/6d0ad460-f600-47a7-b973-4a779ebbaeaf")
+    @GET("/v3/6d0ad460-f600-47a7-b973-4a779ebbaeaf")
     suspend fun getHoldings(): Response<HoldingsApiResponse>
 
     companion object {

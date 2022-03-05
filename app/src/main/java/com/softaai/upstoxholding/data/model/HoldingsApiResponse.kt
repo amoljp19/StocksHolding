@@ -9,9 +9,9 @@ data class HoldingsApiResponse(
     @Json(name = "client_id")
     val clientId: String,
     @Json(name = "data")
-    val `data`: List<Data>,
+    val listData: List<Data>,
     @Json(name = "error")
-    val error: Any,
+    val error: Any?,
     @Json(name = "response_type")
     val responseType: String,
     @Json(name = "timestamp")

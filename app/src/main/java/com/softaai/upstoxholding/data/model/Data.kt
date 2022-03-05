@@ -9,7 +9,7 @@ data class Data(
     @Json(name = "avg_price")
     val avgPrice: String,
     @Json(name = "close")
-    val close: Int,
+    val close: Float,
     @Json(name = "cnc_used_quantity")
     val cncUsedQuantity: Int,
     @Json(name = "collateral_qty")

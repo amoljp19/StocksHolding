@@ -19,7 +19,7 @@ class DefaultHoldingsRepository @Inject constructor(
     override fun getAllHoldings(): Flow<Resource<HoldingsApiResponse>> {
         return object :
             NetworkBoundRepository<HoldingsApiResponse, HoldingsApiResponse>() {
-            
+
             override suspend fun emitFromRemote(): Flow<HoldingsApiResponse> = flowOf(fetchFromRemote().body()!!)
 
             override suspend fun fetchFromRemote(): Response<HoldingsApiResponse> =

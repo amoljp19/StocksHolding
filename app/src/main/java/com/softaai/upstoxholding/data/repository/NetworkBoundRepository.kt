@@ -1,7 +1,7 @@
-package com.softaai.upstoxholding.repository
+package com.softaai.upstoxholding.data.repository
 
 import androidx.annotation.MainThread
-import com.softaai.upstoxholding.remote.Resource
+import com.softaai.upstoxholding.data.remote.Resource
 import kotlinx.coroutines.flow.*
 import retrofit2.Response
 

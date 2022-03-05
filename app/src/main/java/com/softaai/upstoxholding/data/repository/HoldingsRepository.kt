@@ -1,8 +1,8 @@
-package com.softaai.upstoxholding.repository
+package com.softaai.upstoxholding.data.repository
 
-import com.softaai.upstoxholding.model.HoldingsApiResponse
-import com.softaai.upstoxholding.remote.HoldingsApiService
-import com.softaai.upstoxholding.remote.Resource
+import com.softaai.upstoxholding.data.model.HoldingsApiResponse
+import com.softaai.upstoxholding.data.remote.HoldingsApiService
+import com.softaai.upstoxholding.data.remote.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import retrofit2.Response

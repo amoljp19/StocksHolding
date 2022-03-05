@@ -1,6 +1,6 @@
-package com.softaai.upstoxholding.remote
+package com.softaai.upstoxholding.data.remote
 
-import com.softaai.upstoxholding.model.HoldingsApiResponse
+import com.softaai.upstoxholding.data.model.HoldingsApiResponse
 import retrofit2.Response
 import retrofit2.http.GET
 

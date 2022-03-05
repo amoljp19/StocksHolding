@@ -1,7 +1,7 @@
 package com.softaai.upstoxholding.di.module
 
-import com.softaai.upstoxholding.remote.HoldingsApiService
-import com.softaai.upstoxholding.remote.RequestInterceptor
+import com.softaai.upstoxholding.data.remote.HoldingsApiService
+import com.softaai.upstoxholding.data.remote.RequestInterceptor
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module

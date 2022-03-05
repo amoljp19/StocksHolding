@@ -1,4 +1,4 @@
-package com.softaai.upstoxholding.ui.theme
+package com.softaai.upstoxholding.holdings.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

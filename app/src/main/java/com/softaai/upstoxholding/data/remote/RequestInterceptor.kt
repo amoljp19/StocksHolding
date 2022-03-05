@@ -1,4 +1,4 @@
-package com.softaai.upstoxholding.remote
+package com.softaai.upstoxholding.data.remote
 
 import okhttp3.Interceptor
 import okhttp3.Response

@@ -1,7 +1,7 @@
 package com.softaai.upstoxholding.di.module
 
-import com.softaai.upstoxholding.repository.DefaultHoldingsRepository
-import com.softaai.upstoxholding.repository.HoldingsRepository
+import com.softaai.upstoxholding.data.repository.DefaultHoldingsRepository
+import com.softaai.upstoxholding.data.repository.HoldingsRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

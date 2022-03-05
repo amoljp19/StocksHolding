@@ -1,4 +1,4 @@
-package com.softaai.upstoxholding.remote
+package com.softaai.upstoxholding.data.remote
 
 sealed class State<T> {
     class Loading<T> : State<T>()

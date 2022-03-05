@@ -1,4 +1,4 @@
-package com.softaai.upstoxholding.model
+package com.softaai.upstoxholding.data.model
 
 
 import com.squareup.moshi.Json

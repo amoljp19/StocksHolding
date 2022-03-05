@@ -1,4 +1,4 @@
-package com.softaai.upstoxholding.remote
+package com.softaai.upstoxholding.data.remote
 
 sealed class Resource<T> {
     class Success<T>(val data: T) : Resource<T>()

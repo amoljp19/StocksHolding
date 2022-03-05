@@ -5,6 +5,7 @@ import com.softaai.upstoxholding.remote.HoldingsApiService
 import com.softaai.upstoxholding.remote.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
+import retrofit2.Response
 import javax.inject.Inject
 
 interface HoldingsRepository {
@@ -16,6 +17,14 @@ class DefaultHoldingsRepository @Inject constructor(
 ) : HoldingsRepository {
 
     override fun getAllHoldings(): Flow<Resource<HoldingsApiResponse>> {
-       return flowOf()
+        return object :
+            NetworkBoundRepository<HoldingsApiResponse, HoldingsApiResponse>() {
+            
+            override suspend fun emitFromRemote(): Flow<HoldingsApiResponse> = flowOf(fetchFromRemote().body()!!)
+
+            override suspend fun fetchFromRemote(): Response<HoldingsApiResponse> =
+                holdingsApiService.getHoldings()
+
+        }.asFlow()
     }
 }

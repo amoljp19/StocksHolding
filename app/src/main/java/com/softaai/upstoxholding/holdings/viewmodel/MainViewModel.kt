@@ -22,6 +22,8 @@ class MainViewModel @Inject constructor(private val holdingsRepository: Holdings
 
     val holdingsLiveData: LiveData<State<HoldingsApiResponse>> = _holdingsLiveData
 
+
+
     fun getHoldingsList() {
         viewModelScope.launch {
             holdingsRepository.getAllHoldings()

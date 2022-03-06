@@ -41,32 +41,4 @@ class MainViewModel @Inject constructor(private val holdingsRepository: Holdings
         }
     }
 
-
-    fun getCurrentValue(list: List<Data>) : Double {
-        var currentValue = 0.0
-        for (holding in list) {
-             currentValue += holding.ltp * holding.quantity
-        }
-        return currentValue
-    }
-
-    fun getTotalInvestment(list: List<Data>) : Int {
-        var totalInvestment = 0
-        for (holding in list) {
-            totalInvestment += holding.avgPrice.toInt() - holding.quantity
-        }
-        return totalInvestment
-    }
-
-    fun getTotalProfitAndLoss(list: List<Data>) : Double = getCurrentValue(list) - getTotalInvestment(list)
-
-    fun getTodaysProfitAndLoss(list: List<Data>) : Double {
-        var todaysProfitAndLoss = 0.0
-
-        for(holding in list){
-            todaysProfitAndLoss += (holding.close - holding.ltp) * holding.quantity
-        }
-
-        return todaysProfitAndLoss
-    }
 }

@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.softaai.upstoxholding.data.model.Data
+import com.softaai.upstoxholding.holdings.Utils
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
@@ -20,16 +21,13 @@ fun HoldingItem(
     data: Data,
     modifier: Modifier = Modifier
 ) {
-
-    var expanded by remember { mutableStateOf(false) }
-
     Box(modifier = modifier){
           Column(
               modifier = Modifier
                   .fillMaxWidth()
           ) {
 
-              Card(onClick = { expanded = !expanded }) {
+              Card() {
                   Column(
                       modifier = Modifier
                           .fillMaxWidth()
@@ -83,110 +81,14 @@ fun HoldingItem(
                           )
 
                           Text(
-                              text = "\u20B9" + roundOffDecimal(getIndividualItemProfitAndLoss(data = data)),
-                              modifier = Modifier.fillMaxWidth(0.50F),
+                              text = "\u20B9" + Utils.roundOffDecimal(getIndividualItemProfitAndLoss(data = data)),
+                              modifier = Modifier.fillMaxWidth(0.60F),
                               fontWeight = FontWeight.Bold,
                               style = MaterialTheme.typography.subtitle2
                           )
                       }
                   }
 
-              }
-              Divider()
-              AnimatedVisibility(
-                  visible = expanded,
-              ) {
-                  Column(
-                      modifier = Modifier
-                          .fillMaxWidth()
-                          .background(Color.Transparent)
-                          .padding(16.dp)
-                  ) {
-                      Row(
-                          modifier = Modifier
-                              .fillMaxWidth()
-                              .padding(8.dp),
-                          horizontalArrangement = Arrangement.SpaceBetween,
-                          verticalAlignment = Alignment.CenterVertically
-                      ) {
-                          Text(
-                              text = "Current Value : ",
-                              modifier = Modifier.fillMaxWidth(0.50F),
-                              fontWeight = FontWeight.Bold,
-                              style = MaterialTheme.typography.subtitle1
-                          )
-
-                          Text(
-                              text = "\u20B9" +"1000",
-                              modifier = Modifier.fillMaxWidth(0.50F),
-                              style = MaterialTheme.typography.subtitle2
-                          )
-                      }
-
-                      Row(
-                          modifier = Modifier
-                              .fillMaxWidth()
-                              .padding(8.dp),
-                          horizontalArrangement = Arrangement.SpaceBetween,
-                          verticalAlignment = Alignment.CenterVertically
-                      ) {
-                          Text(
-                              text = "Total Investment : ",
-                              modifier = Modifier.fillMaxWidth(0.50F),
-                              fontWeight = FontWeight.Bold,
-                              style = MaterialTheme.typography.subtitle1
-                          )
-
-                          Text(
-                              text = "\u20B9" +"3000",
-                              modifier = Modifier.fillMaxWidth(0.50F),
-                              style = MaterialTheme.typography.subtitle2
-                          )
-                      }
-
-
-                      Row(
-                          modifier = Modifier
-                              .fillMaxWidth()
-                              .padding(8.dp),
-                          horizontalArrangement = Arrangement.SpaceBetween,
-                          verticalAlignment = Alignment.CenterVertically
-                      ) {
-                          Text(
-                              text = "Today Profit & Loss : ",
-                              modifier = Modifier.fillMaxWidth(0.50F),
-                              fontWeight = FontWeight.Bold,
-                              style = MaterialTheme.typography.subtitle1
-                          )
-
-                          Text(
-                              text = "\u20B9" +"9000",
-                              modifier = Modifier.fillMaxWidth(0.50F),
-                              style = MaterialTheme.typography.subtitle2
-                          )
-                      }
-                      Divider()
-                      Row(
-                          modifier = Modifier
-                              .fillMaxWidth()
-                              .padding(8.dp),
-                          horizontalArrangement = Arrangement.SpaceBetween,
-                          verticalAlignment = Alignment.CenterVertically
-                      ) {
-                          Text(
-                              text = "Profit & Loss : ",
-                              modifier = Modifier.fillMaxWidth(0.50F),
-                              fontWeight = FontWeight.Bold,
-                              style = MaterialTheme.typography.subtitle1
-                          )
-
-                          Text(
-                              text = "\u20B9" +"4000",
-                              modifier = Modifier.fillMaxWidth(0.50F),
-                              style = MaterialTheme.typography.subtitle2
-                          )
-                      }
-                  }
               }
           }
       }
@@ -200,8 +102,4 @@ fun getIndividualItemInvestmentValue(avgPrice: String, quantity: Int): Double =
 fun getIndividualItemProfitAndLoss(data : Data): Double = getIndividualItemCurrentValue(data.ltp, data.quantity) -
         getIndividualItemInvestmentValue(data.avgPrice, data.quantity)
 
-fun roundOffDecimal(number: Double): Double {
-    val df = DecimalFormat("#.##")
-    df.roundingMode = RoundingMode.CEILING
-    return df.format(number).toDouble()
-}
+

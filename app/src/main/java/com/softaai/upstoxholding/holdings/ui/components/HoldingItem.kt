@@ -97,7 +97,7 @@ fun HoldingItem(
                   Column(
                       modifier = Modifier
                           .fillMaxWidth()
-                          .background(Color.White)
+                          .background(Color.Transparent)
                           .padding(16.dp)
                   ) {
                       Row(
@@ -117,7 +117,7 @@ fun HoldingItem(
                           Text(
                               text = "\u20B9" +"1000",
                               modifier = Modifier.fillMaxWidth(0.50F),
-                              style = MaterialTheme.typography.h6
+                              style = MaterialTheme.typography.subtitle2
                           )
                       }
 
@@ -138,7 +138,7 @@ fun HoldingItem(
                           Text(
                               text = "\u20B9" +"3000",
                               modifier = Modifier.fillMaxWidth(0.50F),
-                              style = MaterialTheme.typography.h6
+                              style = MaterialTheme.typography.subtitle2
                           )
                       }
 
@@ -160,7 +160,7 @@ fun HoldingItem(
                           Text(
                               text = "\u20B9" +"9000",
                               modifier = Modifier.fillMaxWidth(0.50F),
-                              style = MaterialTheme.typography.h6
+                              style = MaterialTheme.typography.subtitle2
                           )
                       }
                       Divider()
@@ -181,7 +181,7 @@ fun HoldingItem(
                           Text(
                               text = "\u20B9" +"4000",
                               modifier = Modifier.fillMaxWidth(0.50F),
-                              style = MaterialTheme.typography.h6
+                              style = MaterialTheme.typography.subtitle2
                           )
                       }
                   }

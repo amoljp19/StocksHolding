@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 interface HoldingsRepository {
     fun getAllHoldings(): Flow<Resource<HoldingsApiResponse>>
-   }
+}
 
 class DefaultHoldingsRepository @Inject constructor(
     private val holdingsApiService: HoldingsApiService
@@ -20,7 +20,8 @@ class DefaultHoldingsRepository @Inject constructor(
         return object :
             NetworkBoundRepository<HoldingsApiResponse, HoldingsApiResponse>() {
 
-            override suspend fun emitFromRemote(): Flow<HoldingsApiResponse> = flowOf(fetchFromRemote().body()!!)
+            override suspend fun emitFromRemote(): Flow<HoldingsApiResponse> =
+                flowOf(fetchFromRemote().body()!!)
 
             override suspend fun fetchFromRemote(): Response<HoldingsApiResponse> =
                 holdingsApiService.getHoldings()

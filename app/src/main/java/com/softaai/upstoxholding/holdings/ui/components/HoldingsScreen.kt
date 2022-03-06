@@ -1,30 +1,19 @@
 package com.softaai.upstoxholding.holdings.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat
-import com.softaai.upstoxholding.R
 import com.softaai.upstoxholding.data.model.Data
-import com.softaai.upstoxholding.data.model.HoldingsApiResponse
-import com.softaai.upstoxholding.data.remote.State
 import com.softaai.upstoxholding.holdings.Utils
 import com.softaai.upstoxholding.holdings.viewmodel.MainViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 
 
 @Composable
@@ -41,16 +30,6 @@ fun HoldingsScreen(
             .padding(16.dp)
     ) {
         state?.let {
-//                itemsIndexed(
-//                    items = it,
-//                    itemContent = { _, data ->
-//                            HoldingItem(
-//                                data,
-//                                modifier = Modifier
-//                                    .fillMaxSize()
-//                            )
-//                    }
-//                )
 
             val list = it
             items(list.size) { index ->
@@ -78,7 +57,7 @@ fun HoldingsScreen(
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ProfileSummeryFooter(
-    list : List<Data>,
+    list: List<Data>,
     modifier: Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -200,7 +179,7 @@ fun ProfileSummeryFooter(
     }
 }
 
-fun getCurrentValue(list: List<Data>) : Double {
+fun getCurrentValue(list: List<Data>): Double {
     var currentValue = 0.0
     for (holding in list) {
         currentValue += holding.ltp * holding.quantity
@@ -208,7 +187,7 @@ fun getCurrentValue(list: List<Data>) : Double {
     return currentValue
 }
 
-fun getTotalInvestment(list: List<Data>) : Double {
+fun getTotalInvestment(list: List<Data>): Double {
     var totalInvestment = 0.0
     for (holding in list) {
         totalInvestment += holding.avgPrice.toDouble() - holding.quantity
@@ -216,12 +195,13 @@ fun getTotalInvestment(list: List<Data>) : Double {
     return totalInvestment
 }
 
-fun getTotalProfitAndLoss(list: List<Data>) : Double = getCurrentValue(list) - getTotalInvestment(list)
+fun getTotalProfitAndLoss(list: List<Data>): Double =
+    getCurrentValue(list) - getTotalInvestment(list)
 
-fun getTodaysProfitAndLoss(list: List<Data>) : Double {
+fun getTodaysProfitAndLoss(list: List<Data>): Double {
     var todaysProfitAndLoss = 0.0
 
-    for(holding in list){
+    for (holding in list) {
         todaysProfitAndLoss += (holding.close - holding.ltp) * holding.quantity
     }
 

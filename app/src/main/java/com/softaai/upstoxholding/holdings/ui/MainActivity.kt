@@ -7,16 +7,28 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
+import com.softaai.upstoxholding.R
+import com.softaai.upstoxholding.data.model.Data
+import com.softaai.upstoxholding.data.model.HoldingsApiResponse
 import com.softaai.upstoxholding.data.remote.State
+import com.softaai.upstoxholding.holdings.ui.components.HoldingItem
+import com.softaai.upstoxholding.holdings.ui.components.HoldingsScreen
 import com.softaai.upstoxholding.holdings.ui.theme.UpstoxHoldingTheme
 import com.softaai.upstoxholding.holdings.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,7 +49,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    //Greeting("Android")
+                    HoldingsScreen(mViewModel)
                 }
 
                 getHoldingsList()
@@ -47,12 +60,13 @@ class MainActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
-        observeHoldings()
+        observeHoldingsLiveData()
     }
 
     private fun getHoldingsList() = mViewModel.getHoldingsList()
 
-    private fun observeHoldings() {
+    private fun observeHoldingsLiveData() {
+
         mViewModel.holdingsLiveData.observe(this) { state ->
             when (state) {
                 is State.Loading -> Toast.makeText(
@@ -61,178 +75,15 @@ class MainActivity : ComponentActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
                 is State.Success -> {
-                    Toast.makeText(applicationContext, " " + state.data, Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(applicationContext, " " + state.data, Toast.LENGTH_SHORT).show()
+                    mViewModel.setHoldings(state.data.listData)
+                    setContent {
+                        HoldingsScreen(mViewModel = mViewModel)
+                    }
                 }
                 is State.Error -> {
                     Toast.makeText(applicationContext, " " + state.message, Toast.LENGTH_SHORT)
                         .show()
-                }
-            }
-        }
-    }
-}
-
-
-@ExperimentalAnimationApi
-@ExperimentalMaterialApi
-@Composable
-fun HoldingsExpandedList() {
-    var expanded by remember { mutableStateOf(false) }
-
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-    ) {
-
-        Card(onClick = { expanded = !expanded }) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = "symbol",
-                        modifier = Modifier.fillMaxWidth(0.50F),
-                        style = MaterialTheme.typography.subtitle1
-                    )
-
-                    Text(
-                        text = "LTP : ",
-                        modifier = Modifier.fillMaxWidth(0.30F),
-                        style = MaterialTheme.typography.subtitle2
-                    )
-
-                    Text(
-                        text = "100",
-                        modifier = Modifier.fillMaxWidth(0.30F),
-                        style = MaterialTheme.typography.subtitle2
-                    )
-
-                }
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = "SYMBOL",
-                        modifier = Modifier.fillMaxWidth(0.50F),
-                        style = MaterialTheme.typography.subtitle1
-                    )
-
-                    Text(
-                        text = "LTP : ",
-                        modifier = Modifier.fillMaxWidth(0.30F),
-                        style = MaterialTheme.typography.h6
-                    )
-
-                    Text(
-                        text = "100",
-                        modifier = Modifier.fillMaxWidth(0.30F),
-                        style = MaterialTheme.typography.h6
-                    )
-                }
-            }
-
-        }
-        Divider()
-        AnimatedVisibility(
-            visible = expanded,
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color.LightGray)
-                    .padding(16.dp)
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = "Current Value : ",
-                        modifier = Modifier.fillMaxWidth(0.40F),
-                        style = MaterialTheme.typography.subtitle1
-                    )
-
-                    Text(
-                        text = "1000",
-                        modifier = Modifier.fillMaxWidth(0.30F),
-                        style = MaterialTheme.typography.h6
-                    )
-                }
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = "Total Investment : ",
-                        modifier = Modifier.fillMaxWidth(0.40F),
-                        style = MaterialTheme.typography.subtitle1
-                    )
-
-                    Text(
-                        text = "3000",
-                        modifier = Modifier.fillMaxWidth(0.30F),
-                        style = MaterialTheme.typography.h6
-                    )
-                }
-
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = "Today Profit & Loss : ",
-                        modifier = Modifier.fillMaxWidth(0.40F),
-                        style = MaterialTheme.typography.subtitle1
-                    )
-
-                    Text(
-                        text = "9000",
-                        modifier = Modifier.fillMaxWidth(0.30F),
-                        style = MaterialTheme.typography.h6
-                    )
-                }
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = "Profit & Loss : ",
-                        modifier = Modifier.fillMaxWidth(0.40F),
-                        style = MaterialTheme.typography.subtitle1
-                    )
-
-                    Text(
-                        text = "4000",
-                        modifier = Modifier.fillMaxWidth(0.30F),
-                        style = MaterialTheme.typography.h6
-                    )
                 }
             }
         }
@@ -245,12 +96,10 @@ fun Greeting(name: String) {
     Text(text = "Hello $name!")
 }
 
-@OptIn(ExperimentalAnimationApi::class, androidx.compose.material.ExperimentalMaterialApi::class)
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     UpstoxHoldingTheme {
-        //Greeting("Android")
-        HoldingsExpandedList()
+        Greeting("Android")
     }
 }

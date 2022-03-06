@@ -8,6 +8,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.softaai.upstoxholding.data.model.Data
 
@@ -41,6 +42,7 @@ fun HoldingItem(
                           Text(
                               text = data.symbol,
                               modifier = Modifier.fillMaxWidth(0.50F),
+                              fontWeight = FontWeight.Bold,
                               style = MaterialTheme.typography.subtitle1
                           )
 
@@ -53,6 +55,7 @@ fun HoldingItem(
                           Text(
                               text = "\u20B9" + data.ltp,
                               modifier = Modifier.fillMaxWidth(0.50F),
+                              fontWeight = FontWeight.Bold,
                               style = MaterialTheme.typography.subtitle2
                           )
 
@@ -78,8 +81,9 @@ fun HoldingItem(
                           )
 
                           Text(
-                              text = data.avgPrice,
+                              text = "\u20B9" +data.avgPrice,
                               modifier = Modifier.fillMaxWidth(0.50F),
+                              fontWeight = FontWeight.Bold,
                               style = MaterialTheme.typography.subtitle2
                           )
                       }
@@ -93,25 +97,26 @@ fun HoldingItem(
                   Column(
                       modifier = Modifier
                           .fillMaxWidth()
-                          .background(Color.LightGray)
+                          .background(Color.White)
                           .padding(16.dp)
                   ) {
                       Row(
                           modifier = Modifier
                               .fillMaxWidth()
-                              .padding(16.dp),
+                              .padding(8.dp),
                           horizontalArrangement = Arrangement.SpaceBetween,
                           verticalAlignment = Alignment.CenterVertically
                       ) {
                           Text(
                               text = "Current Value : ",
-                              modifier = Modifier.fillMaxWidth(0.40F),
+                              modifier = Modifier.fillMaxWidth(0.50F),
+                              fontWeight = FontWeight.Bold,
                               style = MaterialTheme.typography.subtitle1
                           )
 
                           Text(
-                              text = "1000",
-                              modifier = Modifier.fillMaxWidth(0.30F),
+                              text = "\u20B9" +"1000",
+                              modifier = Modifier.fillMaxWidth(0.50F),
                               style = MaterialTheme.typography.h6
                           )
                       }
@@ -119,19 +124,20 @@ fun HoldingItem(
                       Row(
                           modifier = Modifier
                               .fillMaxWidth()
-                              .padding(16.dp),
+                              .padding(8.dp),
                           horizontalArrangement = Arrangement.SpaceBetween,
                           verticalAlignment = Alignment.CenterVertically
                       ) {
                           Text(
                               text = "Total Investment : ",
-                              modifier = Modifier.fillMaxWidth(0.40F),
+                              modifier = Modifier.fillMaxWidth(0.50F),
+                              fontWeight = FontWeight.Bold,
                               style = MaterialTheme.typography.subtitle1
                           )
 
                           Text(
-                              text = "3000",
-                              modifier = Modifier.fillMaxWidth(0.30F),
+                              text = "\u20B9" +"3000",
+                              modifier = Modifier.fillMaxWidth(0.50F),
                               style = MaterialTheme.typography.h6
                           )
                       }
@@ -140,39 +146,41 @@ fun HoldingItem(
                       Row(
                           modifier = Modifier
                               .fillMaxWidth()
-                              .padding(16.dp),
+                              .padding(8.dp),
                           horizontalArrangement = Arrangement.SpaceBetween,
                           verticalAlignment = Alignment.CenterVertically
                       ) {
                           Text(
                               text = "Today Profit & Loss : ",
-                              modifier = Modifier.fillMaxWidth(0.40F),
+                              modifier = Modifier.fillMaxWidth(0.50F),
+                              fontWeight = FontWeight.Bold,
                               style = MaterialTheme.typography.subtitle1
                           )
 
                           Text(
-                              text = "9000",
-                              modifier = Modifier.fillMaxWidth(0.30F),
+                              text = "\u20B9" +"9000",
+                              modifier = Modifier.fillMaxWidth(0.50F),
                               style = MaterialTheme.typography.h6
                           )
                       }
-
+                      Divider()
                       Row(
                           modifier = Modifier
                               .fillMaxWidth()
-                              .padding(16.dp),
+                              .padding(8.dp),
                           horizontalArrangement = Arrangement.SpaceBetween,
                           verticalAlignment = Alignment.CenterVertically
                       ) {
                           Text(
                               text = "Profit & Loss : ",
-                              modifier = Modifier.fillMaxWidth(0.40F),
+                              modifier = Modifier.fillMaxWidth(0.50F),
+                              fontWeight = FontWeight.Bold,
                               style = MaterialTheme.typography.subtitle1
                           )
 
                           Text(
-                              text = "4000",
-                              modifier = Modifier.fillMaxWidth(0.30F),
+                              text = "\u20B9" +"4000",
+                              modifier = Modifier.fillMaxWidth(0.50F),
                               style = MaterialTheme.typography.h6
                           )
                       }

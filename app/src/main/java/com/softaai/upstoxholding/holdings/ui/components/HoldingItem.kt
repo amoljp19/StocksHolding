@@ -11,6 +11,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.softaai.upstoxholding.data.model.Data
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -81,7 +83,7 @@ fun HoldingItem(
                           )
 
                           Text(
-                              text = "\u20B9" +data.avgPrice,
+                              text = "\u20B9" + roundOffDecimal(getIndividualItemProfitAndLoss(data = data)),
                               modifier = Modifier.fillMaxWidth(0.50F),
                               fontWeight = FontWeight.Bold,
                               style = MaterialTheme.typography.subtitle2
@@ -188,4 +190,18 @@ fun HoldingItem(
               }
           }
       }
+}
+
+fun getIndividualItemCurrentValue(ltp: Double, quantity: Int): Double = ltp * quantity
+
+fun getIndividualItemInvestmentValue(avgPrice: String, quantity: Int): Double =
+    avgPrice.toDouble() - quantity
+
+fun getIndividualItemProfitAndLoss(data : Data): Double = getIndividualItemCurrentValue(data.ltp, data.quantity) -
+        getIndividualItemInvestmentValue(data.avgPrice, data.quantity)
+
+fun roundOffDecimal(number: Double): Double {
+    val df = DecimalFormat("#.##")
+    df.roundingMode = RoundingMode.CEILING
+    return df.format(number).toDouble()
 }

@@ -41,13 +41,6 @@ class MainViewModel @Inject constructor(private val holdingsRepository: Holdings
         }
     }
 
-    fun getIndividualItemCurrentValue(ltp: Double, quantity: Int): Double = ltp * quantity
-
-    fun getIndividualItemInvestmentValue(avgPrice: String, quantity: Int): Int =
-        avgPrice.toInt() - quantity
-
-    fun getIndividualItemProfitAndLoss(currentValue: Double, investmentValue: Int): Double =
-        currentValue - investmentValue
 
     fun getCurrentValue(list: List<Data>) : Double {
         var currentValue = 0.0
